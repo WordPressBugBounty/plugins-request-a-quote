@@ -23,7 +23,7 @@ function request_a_quote_settings_glossary() {
 <div id="glossary" class="accordion-container">
 <ul class="outer-border">
 <li id="emd_quote" class="control-section accordion-section open">
-<h3 class="accordion-section-title hndle" tabindex="1"><?php esc_html_e('Quotes', 'request-a-quote'); ?></h3>
+<h3 class="accordion-section-title hndle" tabindex="1"><button type="button" class="accordion-trigger" aria-expanded="true" aria-controls="target-1"><div class="accordion-title emd"><span class="accordion-title-text"><?php esc_html_e('Quotes', 'request-a-quote'); ?></span><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span></div></button></h3>
 <div class="accordion-section-content">
 <div class="inside">
 <table class="form-table"><p class"lead"><?php esc_html_e('A sales quote allows a prospective buyer to see what costs would be involved for the work they would like to have done.', 'request-a-quote'); ?></p><tr><th style='font-size: 1.1em;color:cadetblue;border-bottom: 1px dashed;padding-bottom: 10px;' colspan=2><div><?php esc_html_e('Attributes', 'request-a-quote'); ?></div></th></tr>

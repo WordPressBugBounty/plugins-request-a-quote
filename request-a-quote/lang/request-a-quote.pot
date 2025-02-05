@@ -7,15 +7,15 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2024-06-30T03:48:43-04:00\n"
-"POT-Creation-Date: 2024-06-30T03:48:43-04:00\n"
+"PO-Revision-Date: 2025-02-04T22:36:46-05:00\n"
+"POT-Creation-Date: 2025-02-04T22:36:46-05:00\n"
 
 #: request-a-quote/includes/admin/getting-started.php:177
-msgid "Welcome to Request a quote Community %s"
+msgid "Welcome to Request A Quote Community %s"
 msgstr ""
 
 #: request-a-quote/includes/admin/getting-started.php:181
-msgid "Request a quote provides an easy to use request a quote form, stores and displays quote requests from customers. It also has fully customizable notification system for customers and admin."
+msgid "Let's get started with Request A Quote Starter edition"
 msgstr ""
 
 #: request-a-quote/includes/admin/getting-started.php:183
@@ -567,20 +567,20 @@ msgstr ""
 msgid "Please share what you expected."
 msgstr ""
 
-#: request-a-quote/includes/scripts.php:75
+#: request-a-quote/includes/scripts.php:78
 msgid "Please enter a unique value."
 msgstr ""
 
-#: request-a-quote/includes/scripts.php:76
+#: request-a-quote/includes/scripts.php:79
 msgid "required"
 msgstr ""
 
-#: request-a-quote/includes/scripts.php:93
+#: request-a-quote/includes/scripts.php:96
 msgid "Taxonomy"
 msgstr ""
 
-#: request-a-quote/includes/scripts.php:106
-#: request-a-quote/includes/scripts.php:111
+#: request-a-quote/includes/scripts.php:109
+#: request-a-quote/includes/scripts.php:114
 msgid "Relationship"
 msgstr ""
 

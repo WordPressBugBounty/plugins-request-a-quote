@@ -28,6 +28,7 @@ function request_a_quote_load_admin_enq($hook) {
 		return;
 	}
 	if (isset($_GET['page']) && $_GET['page'] == 'request_a_quote_settings') {
+		wp_enqueue_style('emd-accordion-css', $dir_url . 'assets/css/emd-accordion.css');
 		wp_enqueue_script('accordion');
 		wp_enqueue_script('country-js', $dir_url . 'assets/js/emd-country.js', array() , '', true);
 		wp_enqueue_style('codemirror-css', $dir_url . 'assets/ext/codemirror/codemirror.min.css');
@@ -38,11 +39,13 @@ function request_a_quote_load_admin_enq($hook) {
 	} else if (isset($_GET['page']) && in_array($_GET['page'], Array(
 		'request_a_quote_notify'
 	))) {
+		wp_enqueue_style('emd-accordion-css', $dir_url . 'assets/css/emd-accordion.css');
 		wp_enqueue_script('accordion');
 		return;
 	} else if (isset($_GET['page']) && in_array($_GET['page'], Array(
 		'request_a_quote_glossary'
 	))) {
+		wp_enqueue_style('emd-accordion-css', $dir_url . 'assets/css/emd-accordion.css');
 		wp_enqueue_script('accordion');
 		return;
 	} else if (isset($_GET['page']) && $_GET['page'] == 'request_a_quote') {

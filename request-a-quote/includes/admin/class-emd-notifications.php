@@ -641,7 +641,7 @@ class Emd_Notifications {
 			settings_fields($app . '_notify_list');
 			foreach ($notify_init_list as $knotify => $vnotify) {
 				echo '<li id="' . esc_attr($knotify) . '" class="control-section accordion-section">
-                                                <h3 class="accordion-section-title hndle" tabindex="0">' . esc_html($vnotify['label']) . '</h3>';
+                                                <h3 class="accordion-section-title hndle" tabindex="0"><button type="button" class="accordion-trigger" aria-expanded="true" aria-controls="target-1"><div class="accordion-title emd"><span class="accordion-title-text">' . esc_html($vnotify['label']) . '</span><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span></div></button></h3>';
 				echo '<div class="accordion-section-content"><div class="inside">';
 				if (!empty($vnotify['desc'])) {
 					echo '<p>' . esc_html($vnotify['desc']) . '</p>';

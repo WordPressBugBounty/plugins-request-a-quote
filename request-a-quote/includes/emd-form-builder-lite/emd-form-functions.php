@@ -578,11 +578,11 @@ if (!function_exists('emd_form_builder_lite_submit_form')) {
 						if (is_array($rel_value)) {
 							foreach ($rel_value as $rvalue) {
 								if(!empty($rvalue)){
-									p2p_type($rel_key)->connect($rvalue, $id);
+									emd_p2p_type($rel_key)->connect($rvalue, $id);
 								}
 							}
 						} else {
-							p2p_type($rel_key)->connect($rel_value, $id);
+							emd_p2p_type($rel_key)->connect($rel_value, $id);
 						}
 					}
 				}
@@ -987,13 +987,13 @@ function emd_form_builder_lite_search_results($fields,$type,$pid){
 				if($fields['class'] == $rel_list[$myfield]['from']){
 					$labels[] = $rel_list[$myfield]['from_title'];
 					if($type == 'content' && !empty($pid)){
-						$connected = p2p_type($rel)->set_direction('to')->get_connected($pid, Array('posts_per_page' => -1,'fields'=>'ids'));
+						$connected = emd_p2p_type($rel)->set_direction('to')->get_connected($pid, Array('posts_per_page' => -1,'fields'=>'ids'));
 					}
 				}
 				else {
 					$labels[] = $rel_list[$myfield]['to_title'];
 					if($type == 'content' && !empty($pid)){
-						$connected = p2p_type($rel)->get_connected($pid, Array('posts_per_page' => -1,'fields'=>'ids'));
+						$connected = emd_p2p_type($rel)->get_connected($pid, Array('posts_per_page' => -1,'fields'=>'ids'));
 					}
 				}
 				if(!empty($connected->posts)){
