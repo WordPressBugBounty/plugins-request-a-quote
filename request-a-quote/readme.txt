@@ -1,16 +1,16 @@
-=== Request a Quote ===
+=== Request a Quote for WordPress ===
 Contributors: emarket-design,safiye
 Plugin URI: https://emdplugins.com
 Author URI: https://emarketdesign.com
 Donate link: https://emarketdesign.com/donate-emarket-design/
 Requires at least: 4.5
-Tested up to: 6.7.1
-Stable tag: 2.5.0
+Tested up to: 6.8.1
+Stable tag: 2.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Tags: request a quote, RFQ, enquiry, request estimate, email quote
+Tags: request a quote, quote form, quotation form, rfq, rfi, enquiry form, estimate request, service business, b2b, quote plugin, custom pricing
 
-Capture Leads & Simplify Sales with Easy Quote Requests.
+Custom Quote Request Form Plugin for Service-Based Businesses
 
 == Description ==
 
@@ -18,26 +18,27 @@ Capture Leads & Simplify Sales with Easy Quote Requests.
 > [Request a quote Starter Demo Site](https://requestaquote.emdplugins.com/?pk_campaign=request-a-quote-com&pk_kwd=readme)
 > Powerful | Easy to use | Beautiful 
 
-Streamline Your Quoting Process: Request a Quote Starter Plugin
+Streamline Your Quoting Process with the Request a Quote Starter Plugin
 
-Request a quote plugin is designed for small business owners to receive request for quotation (RFQ) or request for information (RFI) from customers.
+Request a Quote plugin is is built for small business owners who need a simple, effective way to collect Request for Quotation (RFQ) or Request for Information (RFI) submissions from customers.
 
-Request a quote Starter has the following features:
+Whether you're a freelancer, consultant, agency, or service-based business, this plugin makes it easy to manage quote requests without relying on complex eCommerce platforms.
 
-* Provides a customizable form for customers to submit a request for quotation (RFQ) or request for information (RFI)
-* One to many services or products can be selected by customers
-* Designed to minimize theme related conflicts
-* Easy customization from plugin settings
-* Private quote, estimate request submission for logged-in users only
-* Stores submitted quote, enquiry requests
-* Displays submitted quote, estimate requests on the front end
-* Notifies customers and admin upon receipt of a quote request through customizable notification emails
-* Displays quote request in a tabular form on the front end
-* Comes with setup assistant which automatically creates pages for contact list and quote request form
-* [eMD CSV Import Export](https://emdplugins.com/request-a-quote-importexport-addon/?pk_campaign=request-a-quote-com&pk_kwd=readme) -- Bulk import quotes from existing systems or export them to other external systems using CSV files - [Watch video](https://www.youtube.com/watch?v=tJDQbU3jS0c)
-* [EMD Advanced Filters and Columns Extension](https://emdplugins.com/request-a-quote-smart-search-addon/?pk_campaign=request-a-quote-com&pk_kwd=readme) -- for finding important quote requests faster - [Watch Video](https://www.youtube.com/watch?v=JDIHIibWyR0)
+= Key Features =
 
-Read on how to get more subscribers and target them effectively to sell more using [MailChimp Addon](https://emdplugins.com/request-a-quote-mailchimp-addon/?pk_campaign=request-a-quote-com&pk_kwd=readme)
+* Customizable form for customers to submit RFQ or RFI requests
+* Supports selection of one or multiple products or services
+* Built to minimize conflicts with WordPress themes
+* Easy-to-use settings for quick customization
+* Option to restrict quote submissions to logged-in users (private mode)
+* Stores all submitted quote and enquiry requests in the database
+* Displays submitted quotes and estimates on the front end in a clean, tabular format
+* Sends customizable email notifications to both admin and customer upon submission
+* Includes a setup assistant to automatically generate required pages (e.g., contact list, quote form)
+* [eMD CSV Import Export](https://emdplugins.com/request-a-quote-import-export-addon/?pk_campaign=request-a-quote-com&pk_kwd=readme) -- Bulk import quotes from existing systems or export them to other external systems using CSV files - [Watch video](https://www.youtube.com/watch?v=tJDQbU3jS0c)
+* [EMD Advanced Filters and Columns Extension](https://emdplugins.com/request-a-quote-explore-requests-seamlessly-with-request-a-quote-smart-search-addon/?pk_campaign=request-a-quote-com&pk_kwd=readme) -- for finding important quote requests faster - [Watch Video](https://www.youtube.com/watch?v=JDIHIibWyR0)
+
+Read on how to get more subscribers and target them effectively to sell more using [MailChimp Addon](https://emdplugins.com/request-a-quote-optimize-your-email-marketing-with-request-a-quote-mail-chimp-addon/?pk_campaign=request-a-quote-com&pk_kwd=readme)
 
 [Improving your MailChimp email campaign effectiveness](https://emdplugins.com/articles/improving-your-mailchimp-email-campaign-effectiveness/?pk_campaign=request-a-quote-readme&pk_kwd=request-a-quote-resources)
 
@@ -105,6 +106,14 @@ The simplest way to install is to click on 'Plugins' then 'Add' and type 'Reques
 * Login to your website and go to the Plugins section of your admin panel.
 * Look for "Request a quote" and click Activate.
 
+== Frequently Asked Questions ==
+
+= Can I customize the quote form fields? =  
+Currently, basic customization is available via plugin settings. More advanced form customization is included in Professional version.
+
+= Can I restrict who submits a quote request? =  
+Yes, you can restrict quote submissions to logged-in users only.
+
 == Screenshots ==
 
 1. Quote request admin - Accept and store quote requests
@@ -115,10 +124,13 @@ The simplest way to install is to click on 'Plugins' then 'Add' and type 'Reques
 6. Fully customizable quote request received notification emails for admins
 7. Responsive quote request form
 8. Customize the quote request form based on your needs
-9. [eMD CSV Import Export](https://emdplugins.com/request-a-quote-importexport-addon/?pk_campaign=request-a-quote-com&pk_kwd=readme) -- Bulk import quotes from existing systems or export them to other external systems using CSV files - [Watch video](https://www.youtube.com/watch?v=tJDQbU3jS0c)
-10. [EMD Advanced Filters and Columns Extension](https://emdplugins.com/request-a-quote-smart-search-addon/?pk_campaign=request-a-quote-com&pk_kwd=readme) -- for finding important quote requests faster - [Watch Video](https://www.youtube.com/watch?v=JDIHIibWyR0)
+9. [eMD CSV Import Export](https://emdplugins.com/request-a-quote-import-export-addon/?pk_campaign=request-a-quote-com&pk_kwd=readme) -- Bulk import quotes from existing systems or export them to other external systems using CSV files - [Watch video](https://www.youtube.com/watch?v=tJDQbU3jS0c)
+10. [EMD Advanced Filters and Columns Extension](https://emdplugins.com/request-a-quote-explore-requests-seamlessly-with-request-a-quote-smart-search-addon/?pk_campaign=request-a-quote-com&pk_kwd=readme) -- for finding important quote requests faster - [Watch Video](https://www.youtube.com/watch?v=JDIHIibWyR0)
 
 == Changelog ==
+= 2.5.1 =
+* TWEAK tested with WP 6.8
+* FIXED XSS vulnerability when using custom fields
 = 2.5.0 =
 * FIXED WordPress dashboard accordions issue on setting and glossary pages due to changes in core code on WP 6.7.1
 = 2.4.1 =

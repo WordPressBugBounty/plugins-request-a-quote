@@ -446,19 +446,16 @@ class Emd_Quote extends Emd_Entity {
 			) , $targs);
 		}
 		$tax_list = get_option('request_a_quote_tax_list');
-		$init_tax = get_option('request_a_quote_init_tax', Array());
 		if (!empty($tax_list['emd_quote'])) {
 			foreach ($tax_list['emd_quote'] as $keytax => $mytax) {
-				if (!empty($mytax['init_values']) && (empty($init_tax['emd_quote']) || (!empty($init_tax['emd_quote']) && !in_array($keytax, $init_tax['emd_quote'])))) {
+				if (!empty($mytax['init_values'])) {
 					$set_tax_terms = Array();
 					foreach ($mytax['init_values'] as $myinit) {
 						$set_tax_terms[] = $myinit;
 					}
 					self::set_taxonomy_init($set_tax_terms, $keytax);
-					$init_tax['emd_quote'][] = $keytax;
 				}
 			}
-			update_option('request_a_quote_init_tax', $init_tax);
 		}
 	}
 	/**
