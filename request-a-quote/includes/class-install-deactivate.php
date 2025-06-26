@@ -103,6 +103,7 @@ if (!class_exists('Request_A_Quote_Install_Deactivate')):
 			$this->set_options();
 			$this->set_notification();
 			Emd_Quote::register();
+			$this->init_tax_values(Array());
 			flush_rewrite_rules();
 			$this->set_roles_caps();
 			set_transient($this->option_name . '_activate_redirect', true, 30);
@@ -336,6 +337,55 @@ Thanks',
 			}
 		}
 		/**
+		 * Set initial taxonomy values
+		 *
+		 */
+		private function init_tax_values($tax_list) {
+			if (empty($tax_list)) {
+				$tax_list = get_option($this->option_name . '_tax_list', Array());
+			}
+			if (!empty($tax_list)) {
+				$new_init_tax = Array();
+				$init_tax = get_option($this->option_name . '_init_tax', Array());
+				$new_init_tax = $init_tax;
+				foreach ($tax_list as $ment => $mtax) {
+					foreach ($mtax as $keytax => $mytax) {
+						if (taxonomy_exists($keytax) && !empty($mytax['init_values'])) {
+							if (!empty($init_tax['init_values'][$ment][$keytax])) {
+								$set_tax_terms = Array();
+								foreach ($mytax['init_values'] as $kinit => $myinit) {
+									if (!in_array($myinit['slug'], $init_tax['init_values'][$ment][$keytax])) {
+										$set_tax_terms[] = $myinit;
+										$new_init_tax['init_values'][$ment][$keytax][] = $myinit['slug'];
+									}
+								}
+								if (!empty($set_tax_terms)) {
+									Emd_Entity::set_taxonomy_init($set_tax_terms, $keytax);
+								}
+							} elseif (empty($init_tax['init_values'])) {
+								if (empty($init_tax[$ment]) || (!empty($init_tax[$ment]) && !in_array($keytax, $init_tax[$ment]))) {
+									$set_tax_terms = Array();
+									foreach ($mytax['init_values'] as $myinit) {
+										$set_tax_terms[] = $myinit;
+									}
+									if (!empty($set_tax_terms)) {
+										Emd_Entity::set_taxonomy_init($set_tax_terms, $keytax);
+									}
+									$new_init_tax[$ment][] = $keytax;
+								}
+								foreach ($mytax['init_values'] as $myinit) {
+									$new_init_tax['init_values'][$ment][$keytax][] = $myinit['slug'];
+								}
+							}
+						}
+					}
+				}
+				if (!empty($new_init_tax)) {
+					update_option($this->option_name . '_init_tax', $new_init_tax);
+				}
+			}
+		}
+		/**
 		 * Set app specific options
 		 *
 		 * @since WPAS 4.0
@@ -343,6 +393,7 @@ Thanks',
 		 */
 		private function set_options() {
 			$access_views = Array();
+			$widg_list = Array();
 			if (get_option($this->option_name . '_setup_pages', 0) == 0) {
 				update_option($this->option_name . '_setup_pages', 1);
 			}
@@ -423,6 +474,9 @@ Thanks',
 			);
 			if (!empty($shc_list)) {
 				update_option($this->option_name . '_shc_list', $shc_list);
+			}
+			if (!empty($widg_list)) {
+				update_option($this->option_name . '_widg_list', $widg_list);
 			}
 			$attr_list['emd_quote']['emd_contact_first_name'] = Array(
 				'label' => __('First Name', 'request-a-quote') ,
@@ -831,6 +885,7 @@ Thanks',
 			if (!empty($tax_list)) {
 				update_option($this->option_name . '_tax_list', $tax_list);
 			}
+			$this->init_tax_values($tax_list);
 			$emd_activated_plugins = get_option('emd_activated_plugins');
 			if (!$emd_activated_plugins) {
 				update_option('emd_activated_plugins', Array(

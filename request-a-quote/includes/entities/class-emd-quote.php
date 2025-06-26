@@ -445,18 +445,6 @@ class Emd_Quote extends Emd_Entity {
 				'emd_quote'
 			) , $targs);
 		}
-		$tax_list = get_option('request_a_quote_tax_list');
-		if (!empty($tax_list['emd_quote'])) {
-			foreach ($tax_list['emd_quote'] as $keytax => $mytax) {
-				if (!empty($mytax['init_values'])) {
-					$set_tax_terms = Array();
-					foreach ($mytax['init_values'] as $myinit) {
-						$set_tax_terms[] = $myinit;
-					}
-					self::set_taxonomy_init($set_tax_terms, $keytax);
-				}
-			}
-		}
 	}
 	/**
 	 * Set metabox fields,labels,filters, comments, relationships if exists

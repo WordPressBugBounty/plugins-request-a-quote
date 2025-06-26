@@ -1,16 +1,16 @@
-=== Request a Quote for WordPress ===
+=== Request a Quote Form Plugin – Price Quote Request Management Made Easy ===
 Contributors: emarket-design,safiye
 Plugin URI: https://emdplugins.com
 Author URI: https://emarketdesign.com
 Donate link: https://emarketdesign.com/donate-emarket-design/
 Requires at least: 4.5
 Tested up to: 6.8.1
-Stable tag: 2.5.1
+Stable tag: 2.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Tags: request a quote, quote form, quotation form, rfq, rfi, enquiry form, estimate request, service business, b2b, quote plugin, custom pricing
+Tags: request a quote, quote form, price quote, rfq, rfi, pricing form, inquiry form, quotation request, lead form  
 
-Custom Quote Request Form Plugin for Service-Based Businesses
+Easily collect quote requests with a customizable form and manage them in one place. Perfect for pricing inquiries, RFQs, and RFIs.
 
 == Description ==
 
@@ -18,11 +18,14 @@ Custom Quote Request Form Plugin for Service-Based Businesses
 > [Request a quote Starter Demo Site](https://requestaquote.emdplugins.com/?pk_campaign=request-a-quote-com&pk_kwd=readme)
 > Powerful | Easy to use | Beautiful 
 
-Streamline Your Quoting Process with the Request a Quote Starter Plugin
 
-Request a Quote plugin is is built for small business owners who need a simple, effective way to collect Request for Quotation (RFQ) or Request for Information (RFI) submissions from customers.
+**Easily collect and manage quote requests with a customizable form and centralized dashboard.**
 
-Whether you're a freelancer, consultant, agency, or service-based business, this plugin makes it easy to manage quote requests without relying on complex eCommerce platforms.
+The **Request a Quote Form Plugin** helps businesses streamline the process of receiving and managing price inquiries. Whether you're selling products, offering services, or handling custom orders, this plugin allows customers to submit quote requests directly from your website — and gives you the tools to track, organize, and respond from one place.
+
+It’s a simple yet powerful solution for businesses that want to offer a **Request for Quotation (RFQ)** or **Request for Information (RFI)** form without relying on third-party platforms. From custom pricing to pre-sales questions, the plugin adapts to your workflow.
+
+Perfect for small businesses, freelancers, B2B services, or any site that needs a straightforward, no-code way to collect and manage quote or inquiry submissions.
 
 = Key Features =
 
@@ -114,6 +117,22 @@ Currently, basic customization is available via plugin settings. More advanced f
 = Can I restrict who submits a quote request? =  
 Yes, you can restrict quote submissions to logged-in users only.
 
+= How do I add the quote request form to my site? =  
+Use the shortcode `[request_a_quote_form]`.
+
+= Where are quote requests stored? =  
+All quote requests are securely stored in your WordPress database and can be viewed in the **Requests** section of the admin dashboard.
+
+= Does this plugin send email notifications? =  
+Yes. The admin will receive an email whenever a new quote request is submitted.
+
+= Can I export quote requests? =  
+Yes. You can export all requests to a CSV file from the dashboard.
+
+= Is the plugin compatible with all themes? =  
+Yes. It’s designed to work out of the box with any well-coded WordPress theme.
+
+
 == Screenshots ==
 
 1. Quote request admin - Accept and store quote requests
@@ -128,6 +147,9 @@ Yes, you can restrict quote submissions to logged-in users only.
 10. [EMD Advanced Filters and Columns Extension](https://emdplugins.com/request-a-quote-explore-requests-seamlessly-with-request-a-quote-smart-search-addon/?pk_campaign=request-a-quote-com&pk_kwd=readme) -- for finding important quote requests faster - [Watch Video](https://www.youtube.com/watch?v=JDIHIibWyR0)
 
 == Changelog ==
+= 2.5.2 =
+* FIXED Resolved an issue where deleted taxonomy terms were being unintentionally recreated.
+* FIXED Removed repeated initialization of default taxonomy terms.
 = 2.5.1 =
 * TWEAK tested with WP 6.8
 * FIXED XSS vulnerability when using custom fields
