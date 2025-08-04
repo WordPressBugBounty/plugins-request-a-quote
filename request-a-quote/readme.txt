@@ -4,11 +4,11 @@ Plugin URI: https://emdplugins.com
 Author URI: https://emarketdesign.com
 Donate link: https://emarketdesign.com/donate-emarket-design/
 Requires at least: 4.5
-Tested up to: 6.8.1
-Stable tag: 2.5.2
+Tested up to: 6.8.2
+Stable tag: 2.5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Tags: request a quote, quote form, price quote, rfq, rfi, pricing form, inquiry form, quotation request, lead form  
+Tags: request a quote, quote form, price quote, inquiry form, quotation request 
 
 Easily collect quote requests with a customizable form and manage them in one place. Perfect for pricing inquiries, RFQs, and RFIs.
 
@@ -147,6 +147,9 @@ Yes. It’s designed to work out of the box with any well-coded WordPress theme.
 10. [EMD Advanced Filters and Columns Extension](https://emdplugins.com/request-a-quote-explore-requests-seamlessly-with-request-a-quote-smart-search-addon/?pk_campaign=request-a-quote-com&pk_kwd=readme) -- for finding important quote requests faster - [Watch Video](https://www.youtube.com/watch?v=JDIHIibWyR0)
 
 == Changelog ==
+= 2.5.3 =
+* FIXED Validate input for emd_form_builder_lite_pagenum function
+* FIXED XSS vulnerability for noaccess_msg
 = 2.5.2 =
 * FIXED Resolved an issue where deleted taxonomy terms were being unintentionally recreated.
 * FIXED Removed repeated initialization of default taxonomy terms.
