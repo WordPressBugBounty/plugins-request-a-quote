@@ -654,7 +654,7 @@ function emd_form_builder_lite_attr_display($kfield,$cfield,$set_arrs){
 					if($def == $kopt){
 						$attr_lay .= ' selected';
 					}
-					$attr_lay .= '>' . __($vopt,'request-a-quote') . '</option>';
+					$attr_lay .= '>' . $vopt . '</option>';
 				}
 			}
 			$attr_lay .= '</select>';

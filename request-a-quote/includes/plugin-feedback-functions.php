@@ -17,6 +17,12 @@ add_action('wp_ajax_request_a_quote_show_rateme', 'request_a_quote_show_rateme_a
 add_action('admin_notices', 'request_a_quote_show_optin');
 add_action('admin_post_request-a-quote_check_optin', 'request_a_quote_check_optin');
 function request_a_quote_check_optin() {
+	if (!current_user_can('manage_options')) {
+		wp_die('You do not have permission to modify tracking settings.');
+	}
+	if (!isset($_POST['optin_nonce']) || !wp_verify_nonce(sanitize_text_field($_POST['optin_nonce']) , 'request_a_quote_check_optin_nonce')) {
+		wp_die('Security check failed.');
+	}
 	if (!empty($_POST['request-a-quote_optin'])) {
 		if (!function_exists('wp_get_current_user')) {
 			require_once (ABSPATH . 'wp-includes/pluggable.php');
@@ -41,6 +47,8 @@ function request_a_quote_check_optin() {
 			$data['language'] = get_bloginfo('language');
 			$resp = wp_remote_post('https://api.emarketdesign.com/optin_info.php', array(
 				'body' => $data,
+				'timeout' => 15,
+				'blocking' => false,
 			));
 			update_option('request_a_quote_tracking_optin', 1);
 		} else {
@@ -51,12 +59,15 @@ function request_a_quote_check_optin() {
 		//opt-out
 		update_option('request_a_quote_tracking_optin', -1);
 	}
-	wp_redirect(admin_url('admin.php?page=request_a_quote'));
+	wp_safe_redirect(admin_url('admin.php?page=request_a_quote'));
 	exit;
 }
 function request_a_quote_show_optin() {
 	if (!current_user_can('manage_options')) {
-		return;
+		wp_die('You do not have permission.');
+	}
+	if (isset($_POST['optin_nonce']) && !wp_verify_nonce(sanitize_text_field($_POST['optin_nonce']) , 'request_a_quote_check_optin_nonce')) {
+		wp_die('Security check failed.');
 	}
 	if (!get_option('request_a_quote_tracking_optin')) {
 		$tr_title = __('Please help us improve Request a quote', 'request-a-quote');
@@ -70,6 +81,7 @@ function request_a_quote_show_optin() {
 		));
 		echo '<form method="post" action="' . admin_url('admin-post.php') . '">';
 		echo '<input type="hidden" name="action" value="request-a-quote_check_optin">';
+		echo '<input type="hidden" name="optin_nonce" value="' . wp_create_nonce('request_a_quote_check_optin_nonce') . '">';
 		echo '<div class="update-nag emd-admin-notice">';
 		echo '<h3 class="emd-notice-title"><span class="dashicons dashicons-smiley"></span>' . esc_html($tr_title) . '<span class="dashicons dashicons-smiley"></span></h3><p class="emd-notice-body">';
 		echo wp_kses_post($tr_msg) . '</p>';
@@ -106,7 +118,7 @@ function request_a_quote_show_optin() {
 }
 function request_a_quote_show_rateme_action() {
 	if (!wp_verify_nonce(sanitize_text_field($_POST['rateme_nonce']) , 'request_a_quote_rateme_nonce')) {
-		exit;
+		wp_die('Security check failed.');
 	}
 	$min_trigger = get_option('request_a_quote_show_rateme_plugin_min', 5);
 	if ($min_trigger == - 1) {
@@ -309,10 +321,10 @@ function request_a_quote_deactivation_feedback_box() {
 }
 function request_a_quote_send_deactivate_reason() {
 	if (empty($_POST['deactivate_nonce']) || !isset($_POST['reason_id'])) {
-		exit;
+		wp_die('Security check failed.');
 	}
 	if (!wp_verify_nonce(sanitize_text_field($_POST['deactivate_nonce']) , 'request_a_quote_deactivate_nonce')) {
-		exit;
+		wp_die('Security check failed.');
 	}
 	$uemail = '';
 	$reason_info = isset($_POST['reason_info']) ? sanitize_text_field($_POST['reason_info']) : '';

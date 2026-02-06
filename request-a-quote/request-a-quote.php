@@ -3,7 +3,7 @@
  * Plugin Name: Request a quote
  * Plugin URI: https://emdplugins.com
  * Description: Request a quote provides an easy to use request a quote form, stores and displays quote requests from customers.
- * Version: 2.5.3
+ * Version: 2.5.4
  * Author: eMarketDesign
  * Author URI: https://emdplugins.com
  * Text Domain: request-a-quote
@@ -83,7 +83,7 @@ if (!class_exists('Request_a_quote')):
 		 * @return void
 		 */
 		private function define_constants() {
-			define('REQUEST_A_QUOTE_VERSION', '2.5.3');
+			define('REQUEST_A_QUOTE_VERSION', '2.5.4');
 			define('REQUEST_A_QUOTE_AUTHOR', 'eMarketDesign');
 			define('REQUEST_A_QUOTE_NAME', 'Request a quote');
 			define('REQUEST_A_QUOTE_PLUGIN_FILE', __FILE__);
@@ -258,6 +258,10 @@ if (!class_exists('Request_a_quote')):
 				$this,
 				'display_cust_fields_page'
 			));
+			add_submenu_page($this->app_name, __('Notifications', 'request-a-quote') , __('Notifications', 'request-a-quote') , $settings_pages_cap, $this->app_name . '_notify', array(
+				$this,
+				'display_notify_page'
+			));
 			add_submenu_page($this->app_name, __('Plugins', 'request-a-quote') , __('Plugins', 'request-a-quote') , $settings_pages_cap, $this->app_name . '_store', array(
 				$this,
 				'display_store_page'
@@ -265,10 +269,6 @@ if (!class_exists('Request_a_quote')):
 			add_submenu_page($this->app_name, __('Support', 'request-a-quote') , __('Support', 'request-a-quote') , $settings_pages_cap, $this->app_name . '_support', array(
 				$this,
 				'display_support_page'
-			));
-			add_submenu_page($this->app_name, __('Notifications', 'request-a-quote') , __('Notifications', 'request-a-quote') , $settings_pages_cap, $this->app_name . '_notify', array(
-				$this,
-				'display_notify_page'
 			));
 			//add submenu page under app settings page
 			do_action('emd_ext_add_menu_pages', $this->app_name);
