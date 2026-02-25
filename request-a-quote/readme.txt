@@ -5,7 +5,7 @@ Author URI: https://emarketdesign.com
 Donate link: https://emarketdesign.com/donate-emarket-design/
 Requires at least: 4.5
 Tested up to: 6.9
-Stable tag: 2.5.4
+Stable tag: 2.5.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: request a quote, quote form, price quote, inquiry form, quotation request
@@ -147,6 +147,8 @@ Yes. It’s designed to work out of the box with any well-coded WordPress theme.
 10. [EMD Advanced Filters and Columns Extension](https://emdplugins.com/request-a-quote-explore-requests-seamlessly-with-request-a-quote-smart-search-addon/?pk_campaign=request-a-quote-com&pk_kwd=readme) -- for finding important quote requests faster - [Watch Video](https://www.youtube.com/watch?v=JDIHIibWyR0)
 
 == Changelog ==
+= 2.5.5 =
+* FIXED An issue where non-admin users were blocked from wp-admin due to an incorrect wp_die() call in show_optin()
 = 2.5.4 =
 * FIXED Missing authorization and nonce check in callback function for check_optin
 * TWEAK tested with WP 6.9

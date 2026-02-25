@@ -18,7 +18,7 @@ add_action('admin_notices', 'request_a_quote_show_optin');
 add_action('admin_post_request-a-quote_check_optin', 'request_a_quote_check_optin');
 function request_a_quote_check_optin() {
 	if (!current_user_can('manage_options')) {
-		wp_die('You do not have permission to modify tracking settings.');
+		return;
 	}
 	if (!isset($_POST['optin_nonce']) || !wp_verify_nonce(sanitize_text_field($_POST['optin_nonce']) , 'request_a_quote_check_optin_nonce')) {
 		wp_die('Security check failed.');
@@ -64,7 +64,7 @@ function request_a_quote_check_optin() {
 }
 function request_a_quote_show_optin() {
 	if (!current_user_can('manage_options')) {
-		wp_die('You do not have permission.');
+		return;
 	}
 	if (isset($_POST['optin_nonce']) && !wp_verify_nonce(sanitize_text_field($_POST['optin_nonce']) , 'request_a_quote_check_optin_nonce')) {
 		wp_die('Security check failed.');
