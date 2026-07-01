@@ -3,7 +3,7 @@
  * Plugin Name: Request a quote
  * Plugin URI: https://emdplugins.com
  * Description: Request a quote provides an easy to use request a quote form, stores and displays quote requests from customers.
- * Version: 2.5.5
+ * Version: 2.5.6
  * Author: eMarketDesign
  * Author URI: https://emdplugins.com
  * Text Domain: request-a-quote
@@ -83,7 +83,7 @@ if (!class_exists('Request_a_quote')):
 		 * @return void
 		 */
 		private function define_constants() {
-			define('REQUEST_A_QUOTE_VERSION', '2.5.5');
+			define('REQUEST_A_QUOTE_VERSION', '2.5.6');
 			define('REQUEST_A_QUOTE_AUTHOR', 'eMarketDesign');
 			define('REQUEST_A_QUOTE_NAME', 'Request a quote');
 			define('REQUEST_A_QUOTE_PLUGIN_FILE', __FILE__);

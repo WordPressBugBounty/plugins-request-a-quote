@@ -164,24 +164,29 @@ if (!function_exists('emd_author_search_results')) {
 			$search = $query->query_vars['s'];
 			foreach (array_values($set_types) as $ptype) {
 				$pids = apply_filters('emd_limit_by', $pids, $app, $ptype, 'frontend');
-				$diff_pids = array_diff($pids,Array('0'));	
+				$diff_pids = array_diff($pids,Array('0'));
+				// Prepare wildcard searching safely
+				// esc_like() ensures literal '%' or '_' in user input doesn't break logic
+				$wildcard_search = '%' . $wpdb->esc_like($search) . '%';
+
 				if(empty($pids)){
-					$input_add .= " UNION (SELECT * FROM " . $wpdb->posts . " WHERE " . $wpdb->posts . ".post_type ='" . $ptype . "' AND " . $wpdb->posts . ".post_status = 'publish' AND ";
+					$input_add .= " UNION (SELECT * FROM " . $wpdb->posts . " WHERE " . $wpdb->posts . ".post_type ='" . esc_sql($ptype) . "' AND " . $wpdb->posts . ".post_status = 'publish' AND ";
 					if($type == 'author'){
 						$input_add .=  $wpdb->posts . ".post_author=" . $auth_id . ")";
 					}
 					elseif($type == 'search'){
-						$input_add .=  "(" . $wpdb->posts . ".post_title LIKE '%" . $search . "%' OR " . $wpdb->posts . ".post_content LIKE '%" . $search . "%'))";
+						$input_add .=  $wpdb->prepare("(" . $wpdb->posts . ".post_title LIKE %s OR " . $wpdb->posts . ".post_content LIKE %s))", $wildcard_search,$wildcard_search);
 					}
 				}
 				elseif(!empty($diff_pids)) {
-					$pids_arr = "(" . implode(",",$pids) . ")";
+					$pids_cleaned = array_map('intval', $pids);
+					$pids_arr = "(" . implode(",", $pids_cleaned) . ")";
 					$input_add .= " UNION (SELECT * FROM " . $wpdb->posts . " WHERE " . $wpdb->posts . ".ID IN " . $pids_arr . " AND ";
 					if($type == 'author'){
 						$input_add .= $wpdb->posts . ".post_author=" . $auth_id . ")";
 					}
 					elseif($type == 'search'){
-						$input_add .=  "(" . $wpdb->posts . ".post_title LIKE '%" . $search . "%') OR (" . $wpdb->posts . ".post_content LIKE '%" . $search . "%'))";
+						$input_add .=  $wpdb->prepare("(" . $wpdb->posts . ".post_title LIKE %s) OR (" . $wpdb->posts . ".post_content LIKE %s))",$wildcard_search,$wildcard_search);
 					}
 				}
 			}
@@ -1018,11 +1023,38 @@ if (!function_exists('emd_load_file')) {
 			echo '<div class="text-danger"><a href="' . wp_get_referer() . '">' . esc_html__('Please refresh the page and try again.', 'request-a-quote') . '</a></div>';
 			die();
 		}
-		$path = sanitize_text_field($_POST['path']);
-		$myapp = strtolower(preg_replace('/_PLUGIN_DIR$/','',$path));
-		require_once constant($path) . 'assets/ext/filepicker/upload.php';
-		$upload_handler = new UploadHandler(true, sanitize_text_field($_POST['field']), sanitize_text_field($_POST['extensions']),$myapp);
-		die();
+		if ( ! defined( 'REQUEST_A_QUOTE_PLUGIN_DIR' ) ) {
+			echo '<div class="text-danger">' . esc_html__('Configuration error.', 'request-a-quote') . '</div>';
+			die();
+		}
+		$myapp = 'request_a_quote';
+		require_once REQUEST_A_QUOTE_PLUGIN_DIR . 'assets/ext/filepicker/upload.php';
+
+		$master_allowed = array('jpg', 'jpeg', 'png', 'pdf', 'doc', 'docx', 'zip');
+
+		$final_extensions = array();
+		if ( ! empty( $_POST['extensions'] ) ) {
+                        // Clean the incoming text field and convert it to an array
+                        $user_input = sanitize_text_field( $_POST['extensions'] );
+                        $user_extensions = explode( ',', $user_input );
+
+                        foreach ( $user_extensions as $ext ) {
+                            $ext = strtolower( trim( $ext ) ); // Normalize
+
+                            if ( in_array( $ext, $master_allowed, true ) ) {
+                                $final_extensions[] = $ext;
+                            }
+                        }
+                }
+
+		if ( empty( $final_extensions ) ) {
+                        $final_extensions = $master_allowed;
+                }
+
+                $field = isset($_POST['field']) ? sanitize_text_field($_POST['field']) : '';
+
+                $upload_handler = new UploadHandler(true, $field, $final_extensions, $myapp);
+                die();
 	}
 }
 if (!function_exists('emd_delete_file')) {
@@ -1030,24 +1062,35 @@ if (!function_exists('emd_delete_file')) {
 		$ret = check_ajax_referer('emd_delete_file', 'nonce', false);
 		if ($ret === false) {
 			echo '<div class="text-danger"><a href="' . wp_get_referer() . '">' . esc_html__('Please refresh the page and try again.', 'request-a-quote') . '</a></div>';
-			die();
+			wp_die();
 		}
-		$path = sanitize_text_field($_POST['path']);
-		$myapp = strtolower(preg_replace('/_PLUGIN_DIR$/','',$path));
+		$myapp = 'request_a_quote';
 		$sess_name = strtoupper($myapp);
-		$session_class = $sess_name();
+		if ( function_exists($sess_name) ) {
+			$session_class = $sess_name();
+		} else {
+			echo '<div class="text-danger">' . esc_html__('System configuration error.', 'request-a-quote') . '</div>';
+			wp_die();
+		}
+		if ( ! $session_class || ! isset($session_class->session) ) {
+			echo '<div class="text-danger">' . esc_html__('Session handler unavailable.', 'request-a-quote') . '</div>';
+			wp_die();
+		}
 		$sess_files = $session_class->session->get('uploads');
-		$field = sanitize_text_field($_POST['field']);
-		if(!empty($sess_files[$field])){
-			foreach($sess_files[$field] as $kattch => $myattch){
-				if($myattch['name'] == sanitize_text_field($_POST['del_file'])){
+		$field = isset($_POST['field']) ? sanitize_text_field($_POST['field']) : '';
+		if ( ! empty( $sess_files[$field] ) && isset( $_POST['del_file'] ) ) {
+			$del_file_target = sanitize_text_field($_POST['del_file']);
+
+			foreach ( $sess_files[$field] as $kattch => $myattch ) {
+				if ( isset($myattch['full_path']) && $myattch['full_path'] === $del_file_target ) {
 					unset($sess_files[$field][$kattch]);
 				}
 			}
-			$session_class->session->set('uploads',$sess_files);
+			// Update the user's specific session
+			$session_class->session->set('uploads', $sess_files);
 		}
 		echo 1;
-		die();
+		wp_die();
 	}
 }
 if(!function_exists('emd_get_attachment_layout')){
